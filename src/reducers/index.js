@@ -1,4 +1,4 @@
-import { LOADING, SUCCESS, ERROR } from '../actions/index';
+import { LOADING, SUCCESS, SET_ERROR, ADD_SMURF } from '../actions/index';
 
 export const initialState = {
     smurfs: [],
@@ -20,7 +20,12 @@ const reducer = (state = initialState, action) => {
                 smurfs: action.payload,
                 error: ''
             }
-        case ERROR: 
+        case ADD_SMURF:
+            return {
+                ...state,
+                smurfs: [...state.smurfs, {...action.payload, id: Date.now()}],
+            }
+        case SET_ERROR: 
             return {
                 ...state,
                 loading: false,
